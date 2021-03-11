@@ -1,0 +1,19 @@
+{
+    "_id": "1234",
+    "businessName" : "Sawasdee Restaurant",
+    "type" : [
+        "Thai",
+        "Fine Dining"
+    ],
+    "description": "Lorem",
+    "location": {
+        "latitude": "13.726598091354633",
+        "longtitude": "100.77516286412559"
+    },
+    "address" : "1 Chalongkrubg Rd. ",
+    "display_image" : "https://d2eohwa6gpdg50.cloudfront.net/wp-content/uploads/sites/8/2020/09/02181648/IMAGE-Interior-1-Caption-WORKSHOP-RESTAURANT-_-GALLERY-interior-1024x683.jpg",
+    "image": [
+        "https://www.remotelands.com/travelogues/app/uploads/2018/08/shutterstock_761494024.jpg",
+        "https://www.eatingthaifood.com/wp-content/uploads/2018/12/best-thai-restaurants-in-bangkok.jpg"
+    ]
+}
