@@ -8,7 +8,7 @@ class DrawerComponent extends StatelessWidget {
       DrawerHeader(
           child: Text("Menu"), decoration: BoxDecoration(color: Colors.blue)),
       ListTile(
-          title: Text("Menu 1"),
+          title: Text("Business Request"),
           onTap: () {
             Navigator.pop(context);
           }),

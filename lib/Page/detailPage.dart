@@ -23,6 +23,13 @@ class _DetailPageState extends State<DetailPage> {
   // Future<RequestItemDetail> getBusiness() async {
   //   var business = await BusinessRepository.getBusiness();
   // }
+  bool _readOnlyMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _readOnlyMode = true;
+  }
 
   RequestItemDetail business = new RequestItemDetail(
       "1234",
@@ -46,11 +53,21 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   CarouselController buttonCarouselController = CarouselController();
+  // TextEditingController _textEditingController = TextEditingController();
 
-  void _handleApprovedButton() => {
-
-  };
+  void _handleApprovedButton() => {};
   void _handleRejectedButton() => {};
+  void _handleEditButton() {
+    setState(() {
+      _readOnlyMode = false;
+    });
+  }
+
+  void _handleSaveButton() {
+    setState(() {
+      _readOnlyMode = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +75,7 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       drawer: DrawerComponent(),
       appBar: AppBar(
-        title: Text("Restaurant Detail"),
+        title: Text("Business Detail"),
       ),
       body: Column(
         children: [
@@ -68,31 +85,84 @@ class _DetailPageState extends State<DetailPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                    child: Text(business.businessName,
-                        style: customTextTheme.headline3)),
-                Row(children: [
-                  Container(
-                    padding: EdgeInsets.only(right: 5),
-                    child: OutlinedButton(
-                      onPressed: _handleRejectedButton,
-                      child: Text("Reject"),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red),
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white)),
-                    ),
+                    child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: _readOnlyMode ? 2 : 2,
+                          color: _readOnlyMode ? Colors.white : Colors.grey)),
+                  child: EditableText(
+                    readOnly: _readOnlyMode,
+                    expands: true,
+                    controller:
+                        TextEditingController(text: business.businessName),
+                    focusNode: FocusNode(),
+                    style: customTextTheme.headline3,
+                    cursorColor: Colors.amber,
+                    backgroundCursorColor: Colors.red,
+                    minLines: null,
+                    maxLines: null,
                   ),
-                  OutlinedButton(
-                    onPressed: _handleApprovedButton,
-                    child: Text("Approve"),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.green),
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white)),
-                  )
-                ]),
+                )
+                    // child: Text(business.businessName,
+                    //     style: customTextTheme.headline3)
+                    ),
+                Row(
+                    children: _readOnlyMode
+                        ? [
+                            Container(
+                              padding: EdgeInsets.only(right: 5),
+                              child: OutlinedButton(
+                                onPressed: _handleEditButton,
+                                child: Text("Edit Information"),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all(Colors.grey),
+                                    foregroundColor: MaterialStateProperty.all(
+                                        Colors.white)),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(right: 5),
+                              child: OutlinedButton(
+                                onPressed: _handleRejectedButton,
+                                child: Text("Reject"),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.red),
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white)),
+                              ),
+                            ),
+                            OutlinedButton(
+                              onPressed: _handleApprovedButton,
+                              child: Text("Approve"),
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.green),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white)),
+                            )
+                          ]
+                        : [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: OutlinedButton(
+                                onPressed: _handleSaveButton,
+                                child: Text("Save"),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.amber),
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.black)),
+                              ),
+                            )
+                          ]),
               ],
             ),
           ),
@@ -110,8 +180,26 @@ class _DetailPageState extends State<DetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Description", style: customTextTheme.headline4),
-                          Text(business.description,
-                              style: customTextTheme.bodyText1)
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: _readOnlyMode ? 2 : 2,
+                                    color: _readOnlyMode
+                                        ? Colors.white
+                                        : Colors.grey)),
+                            child: EditableText(
+                              readOnly: _readOnlyMode,
+                              expands: true,
+                              controller: TextEditingController(
+                                  text: business.description),
+                              focusNode: FocusNode(),
+                              style: customTextTheme.bodyText1,
+                              cursorColor: Colors.amber,
+                              backgroundCursorColor: Colors.red,
+                              minLines: null,
+                              maxLines: null,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -162,8 +250,28 @@ class _DetailPageState extends State<DetailPage> {
                                 initialCameraPosition: CameraPosition(
                                     target: _center, zoom: 11.0)),
                           ),
-                          Text(business.address,
-                              style: customTextTheme.bodyText1),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: _readOnlyMode ? 2 : 2,
+                                    color: _readOnlyMode
+                                        ? Colors.white
+                                        : Colors.grey)),
+                            child: EditableText(
+                              controller:
+                                  TextEditingController(text: business.address),
+                              readOnly: _readOnlyMode,
+                              expands: true,
+                              minLines: null,
+                              maxLines: null,
+                              backgroundCursorColor: Colors.amber,
+                              cursorColor: Colors.amber,
+                              focusNode: FocusNode(),
+                              style: customTextTheme.bodyText1,
+                            ),
+                          ),
+                          // Text(business.address,
+                          //     style: customTextTheme.bodyText1),
                         ],
                       ),
                     ),
@@ -173,8 +281,28 @@ class _DetailPageState extends State<DetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Policy", style: customTextTheme.headline4),
-                          Text("No minimum age",
-                              style: customTextTheme.bodyText1)
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: _readOnlyMode ? 2 : 2,
+                                    color: _readOnlyMode
+                                        ? Colors.white
+                                        : Colors.grey)),
+                            child: EditableText(
+                              controller:
+                                  TextEditingController(text: "No minimum age"),
+                              readOnly: _readOnlyMode,
+                              expands: true,
+                              minLines: null,
+                              maxLines: null,
+                              backgroundCursorColor: Colors.amber,
+                              cursorColor: Colors.amber,
+                              focusNode: FocusNode(),
+                              style: customTextTheme.bodyText1,
+                            ),
+                          ),
+                          // Text("No minimum age",
+                          //     style: customTextTheme.bodyText1)
                         ],
                       ),
                     ),

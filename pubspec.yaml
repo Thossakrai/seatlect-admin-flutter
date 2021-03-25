@@ -31,7 +31,6 @@ dependencies:
   google_maps_flutter: ^2.0.0
   google_maps_flutter_web: ^0.2.0
   carousel_slider: ^3.0.0
-  cool_alert: ^1.0.3
 
 dev_dependencies:
   flutter_test:
