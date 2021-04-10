@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:seatlect_admin/Component/RejectAndApproveButtonWidget.dart';
 import 'package:seatlect_admin/Component/drawerWidget.dart';
 import 'package:seatlect_admin/Model/requestItemDetailModel.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -122,30 +123,9 @@ class _DetailPageState extends State<DetailPage> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(right: 5),
-                              child: OutlinedButton(
-                                onPressed: _handleRejectedButton,
-                                child: Text("Reject"),
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.red),
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.white)),
-                              ),
-                            ),
-                            OutlinedButton(
-                              onPressed: _handleApprovedButton,
-                              child: Text("Approve"),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.green),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.white)),
-                            )
+                                child: RejectAndApproveButtonWidget(
+                                    _handleRejectedButton,
+                                    _handleApprovedButton))
                           ]
                         : [
                             Padding(

@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatlect_admin/Component/drawerWidget.dart';
 import 'package:seatlect_admin/Component/requestListWidget.dart';
 import 'package:seatlect_admin/Model/requestItemDetailModel.dart';
+import 'package:seatlect_admin/Networking/businessAPI.dart';
+import 'package:seatlect_admin/Page/LoginPage.dart';
+import 'package:seatlect_admin/Page/changeRequestPage.dart';
 import 'package:seatlect_admin/Page/detailPage.dart';
 import 'package:seatlect_admin/Repository/businessRepository.dart';
 
@@ -24,8 +27,7 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
               headline4: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              bodyText1: TextStyle(color: Colors.black, fontSize: 16)
-          )),
+              bodyText1: TextStyle(color: Colors.black, fontSize: 16))),
       home: MyHomePage(title: 'SEATLECT for Administrator'),
     );
   }
@@ -41,6 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // ),
       // body: Center(child: RequestList()),
       body: Center(
-        child: DetailPage(),
+        child: LoginPage(),
+        //TODO remove policy
       ),
     );
   }
