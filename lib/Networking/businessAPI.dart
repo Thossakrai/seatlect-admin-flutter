@@ -12,7 +12,7 @@ class BusinessAPI {
     var response = await http
         .get(Uri.http('localhost:9999', '/api/v1/business', queryParams));
     if (response.statusCode == 200) {
-      print('200');
+      print('Business API 200');
     } else {
       print('40x');
     }

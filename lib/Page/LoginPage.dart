@@ -22,14 +22,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleLogin() {
-    // var res = BusinessAPI().getBusiness(1, 1);
-    // print(res);
     print("Username = " +
         _textUsernameController.text +
         " / Password = " +
         _textPasswordController.text);
     var response = AdminAPI()
-        .login(_textUsernameController.text, _textPasswordController.text);
+        .login(_textUsernameController.text, _textPasswordController.text)
+        .then((value) => print(value));
     print(response);
     // var code = response.statusCode;
     // var snackBarSuccess = SnackBar(content: Text('Status code = $code'));
