@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'networking.dart';
 
-class BusinessAPI {
-  Future<http.Response> getBusiness(int status, int page) async {
+class RequestAPI {
+  Future<http.Response> listRequest(int status, int page) async {
     Map<String, String> queryParams = {
       'status': status.toString(),
       'page': page.toString(),
@@ -17,5 +18,17 @@ class BusinessAPI {
       print('40x');
     }
     return response;
+  }
+
+  void approveRequest(String businessId) {
+
+  }
+
+  void rejectRequest(String businessId) {
+
+  }
+
+  Future<http.Response> getRequest(int status, int page) async {
+
   }
 }
