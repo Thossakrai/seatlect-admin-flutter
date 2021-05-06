@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:html';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:seatlect_admin/Component/RejectAndApproveButtonWidget.dart';
@@ -6,6 +8,7 @@ import 'package:seatlect_admin/Component/drawerWidget.dart';
 import 'package:seatlect_admin/Model/requestItemDetailModel.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:seatlect_admin/Networking/requestAPI.dart';
 
 class DetailPage extends StatefulWidget {
   //load mock data and map to the business detail class
@@ -15,21 +18,19 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  // RequestItemDetail business;
-  // @override //FIX
-  // Future<void> setState(fn) async {
-  //   await BusinessRepository.getBusiness().then((value) => {print(value)});
-  // }
-
-  // Future<RequestItemDetail> getBusiness() async {
-  //   var business = await BusinessRepository.getBusiness();
-  // }
   bool _readOnlyMode;
+  var api = RequestAPI();
 
   @override
   void initState() {
     super.initState();
     _readOnlyMode = true;
+  }
+
+  RequestItemDetail getRequest(String requestId) {
+    var response = api.getRequest(requestId);
+    //FIXME json decode the response
+    print(jsonDecode(response.toString()));
   }
 
   RequestItemDetail business = new RequestItemDetail(
