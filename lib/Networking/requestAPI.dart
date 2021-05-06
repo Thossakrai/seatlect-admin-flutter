@@ -22,16 +22,25 @@ class RequestAPI {
   void approveRequest(String requestId) {
     http.post(Uri.http(
       devServer,
-      commonEndpoint + '$requestId/approve',
+      commonEndpoint + '/$requestId/approve',
     ));
   }
 
   void rejectRequest(String requestId) {
     http.delete(Uri.http(
       devServer,
-      commonEndpoint + '$requestId',
+      commonEndpoint + '/$requestId',
     ));
   }
 
-  Future<http.Response> getRequest(int status, int page) async {}
+  Future<http.Response> getRequest(String requestId) async {
+    var response =
+        await http.get(Uri.http(devServer, commonEndpoint + '/$requestId'));
+    if (response.statusCode >= 400) {
+      print('get request 40x');
+    } else if (response.statusCode >= 200) {
+      print('get request 20x 30x');
+    }
+    return response;
+  }
 }
