@@ -20,11 +20,11 @@ class RequestAPI {
     return response;
   }
 
-  void approveRequest(String businessId) {
+  void approveRequest(String requestId) {
 
   }
 
-  void rejectRequest(String businessId) {
+  void rejectRequest(String requestId) {
 
   }
 
