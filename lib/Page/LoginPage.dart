@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:seatlect_admin/Networking/adminAPI.dart';
 import 'package:seatlect_admin/Networking/businessAPI.dart';
+import 'package:seatlect_admin/Page/allRequestPage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,9 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         .login(_textUsernameController.text, _textPasswordController.text)
         .then((value) => print(value));
     print(response);
-    // var code = response.statusCode;
-    // var snackBarSuccess = SnackBar(content: Text('Status code = $code'));
-    // ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AllRequestPage()));
   }
 
   @override
