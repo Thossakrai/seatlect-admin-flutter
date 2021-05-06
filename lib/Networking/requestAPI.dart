@@ -4,16 +4,17 @@ import 'package:http/http.dart' as http;
 import 'networking.dart';
 
 class RequestAPI {
-  Future<http.Response> listRequest(int status, int page) async {
+  String devServer = 'localhost:9999';
+  String commonEndpoint = '/api/v1/request';
+  Future<http.Response> listRequest(int page) async {
     Map<String, String> queryParams = {
-      'status': status.toString(),
       'page': page.toString(),
     };
 
-    var response = await http
-        .get(Uri.http('localhost:9999', '/api/v1/business', queryParams));
+    var response =
+        await http.get(Uri.http(devServer, commonEndpoint, queryParams));
     if (response.statusCode == 200) {
-      print('Business API 200');
+      print('Request API 200');
     } else {
       print('40x');
     }
@@ -21,14 +22,18 @@ class RequestAPI {
   }
 
   void approveRequest(String requestId) {
-
+    http.post(Uri.http(
+      devServer,
+      commonEndpoint + '$requestId/approve',
+    ));
   }
 
   void rejectRequest(String requestId) {
-
+    http.delete(Uri.http(
+      devServer,
+      commonEndpoint + '$requestId',
+    ));
   }
 
-  Future<http.Response> getRequest(int status, int page) async {
-
-  }
+  Future<http.Response> getRequest(int status, int page) async {}
 }
